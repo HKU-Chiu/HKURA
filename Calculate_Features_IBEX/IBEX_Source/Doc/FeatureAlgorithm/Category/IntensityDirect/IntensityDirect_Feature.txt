@@ -1,0 +1,225 @@
+***Feature_Energy_Info***
+--Reference:
+1. Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+   Nat. Commun. 2014; 5: 4006.
+2. http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+3. Fave, X. et al. Impact of image preprocessing on the volume dependence and prognostic potential of radiomics features in non-small cell lung cancer. Translational Cancer Research 5, 349-363 (2016).
+ 
+***Feature_EnergyNorm_Info***
+--Reference:
+1. Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+   Nat. Commun. 2014; 5: 4006.
+2. http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+3. Fave, X. et al. Impact of image preprocessing on the volume dependence and prognostic potential of radiomics features in non-small cell lung cancer. Translational Cancer Research 5, 349-363 (2016).
+ 
+***Feature_GlobalEntropy_Info***
+-Description: 
+The intensity entropy among all the voxels.
+
+-Parameters:
+1. NBins:          The number of bins.
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+4. RangeFix:     1==The specified RangeMin and RangeMax specified are used. 0==Ignore the specified RangeMin and RangeMax, and 
+                    RangeMin and RangeMax are dynamically determined by min and max of the current image.
+ 
+***Feature_GlobalMax_Info***
+The intensity maximum among all the voxels.
+ 
+***Feature_GlobalMean_Info***
+The intensity mean among all the voxels.
+ 
+***Feature_GlobalMedian_Info***
+The intensity median among all the voxels.
+ 
+***Feature_GlobalMin_Info***
+The intensity minimum among all the voxels.
+ 
+***Feature_GlobalStd_Info***
+The intensity standard deviation among all the voxels.
+ 
+***Feature_GlobalUniformity_Info***
+-Description: 
+The intensity uniformity among all the voxels.
+
+-Parameters:
+1. NBins:          The number of bins.
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+4. RangeFix:     1==The specified RangeMin and RangeMax specified are used. 0==Ignore the specified RangeMin and RangeMax, and 
+                    RangeMin and RangeMax are dynamically determined by min and max of the current image.
+ 
+***Feature_InterQuartileRange_Info***
+The interquartile range of the intensity values among all the voxels.
+ 
+***Feature_Kurtosis_Info***
+Measure the peakedness of all the voxels' intensity.
+ 
+***Feature_LocalEntropyMax_Info***
+-Description: 
+1. First, at each voxel, compute entropy in its neighborhood region.
+2. Then, compute the maximum among all the voxel's entropy caculated from 1.
+
+-Parameters:
+1. NHood:        Size of the neighborhood
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+ 
+***Feature_LocalEntropyMean_Info***
+-Description: 
+1. First, at each voxel, compute entropy in its neighborhood region.
+2. Then, compute the mean among all the voxel's entropy caculated from 1.
+
+-Parameters:
+1. NHood:        Size of the neighborhood
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+ 
+***Feature_LocalEntropyMedian_Info***
+-Description: 
+1. First, at each voxel, compute entropy in its neighborhood region.
+2. Then, compute the median among all the voxel's entropy caculated from 1.
+
+-Parameters:
+1. NHood:        Size of the neighborhood
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+ 
+***Feature_LocalEntropyMin_Info***
+-Description: 
+1. First, at each voxel, compute entropy in its neighborhood region.
+2. Then, compute the minimum among all the voxel's entropy caculated from 1.
+
+-Parameters:
+1. NHood:        Size of the neighborhood
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+ 
+***Feature_LocalEntropyStd_Info***
+-Description: 
+1. First, at each voxel, compute entropy in its neighborhood region.
+2. Then, compute the standard deviation among all the voxel's entropy caculated from 1.
+
+-Parameters:
+1. NHood:        Size of the neighborhood
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+ 
+***Feature_LocalRangeMax_Info***
+-Description: 
+1. First, at each voxel, compute range value(MaxValue-MinValue) in its neighborhood region.
+2. Then, compute the median among all the voxel's range value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalRangeMean_Info***
+-Description: 
+1. First, at each voxel, compute range value(MaxValue-MinValue) in its neighborhood region.
+2. Then, compute the mean among all the voxel's range value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalRangeMedian_Info***
+-Description: 
+1. First, at each voxel, compute range value(MaxValue-MinValue) in its neighborhood region.
+2. Then, compute the median among all the voxel's range value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalRangeMin_Info***
+-Description: 
+1. First, at each voxel, compute range value(MaxValue-MinValue) in its neighborhood region.
+2. Then, compute the minimum among all the voxel's range value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalRangeStd_Info***
+-Description: 
+1. First, at each voxel, compute range value(MaxValue-MinValue) in its neighborhood region.
+2. Then, compute the standard deviation among all the voxel's range value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalStdMax_Info***
+-Description: 
+1. First, at each voxel, compute standard deviation in its neighborhood region.
+2. Then, compute the maximum among all the voxel's standard deviation value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalStdMean_Info***
+-Description: 
+1. First, at each voxel, compute standard deviation in its neighborhood region.
+2. Then, compute the mean among all the voxel's standard deviation value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalStdMedian_Info***
+-Description: 
+1. First, at each voxel, compute standard deviation in its neighborhood region.
+2. Then, compute the median among all the voxel's standard deviation value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalStdMin_Info***
+-Description: 
+1. First, at each voxel, compute standard deviation in its neighborhood region.
+2. Then, compute the mimimum among all the voxel's standard deviation value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_LocalStdStd_Info***
+-Description: 
+1. First, at each voxel, compute standard deviation in its neighborhood region.
+2. Then, compute the standard deviation all the voxel's standard deviation value caculated from 1.
+
+-Parameters:
+1. NHood:    Size of the neighborhood
+ 
+***Feature_MeanAbsoluteDeviation_Info***
+The mean absolute deviation of the intensity values among all the voxels.
+ 
+***Feature_MedianAbsoluteDeviation_Info***
+The median absolute deviation of the intensity values among all the voxels.
+ 
+***Feature_Percentile_Info***
+-Description: 
+Percentiles of the intensity values among all the voxels.
+
+-Parameters:
+1.  Percentile: Percent values.
+ 
+***Feature_Quantile_Info***
+-Description: 
+Quantiles of the intensity values among all the voxels.
+
+-Parameters:
+1.  Quantile: Cumulative probability values.
+ 
+***Feature_Range_Info***
+The intensity range(MaxValue-MinValue) among all the voxels.
+ 
+***Feature_RootMeanSquare_Info***
+--Reference:
+1. Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+   Nat. Commun. 2014; 5: 4006.
+2. http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_Skewness_Info***
+Measure the  asymmetry of all the voxels' intensity.
+ 
+***Feature_Variance_Info***
+--Reference:
+1. Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+   Nat. Commun. 2014; 5: 4006.
+2. http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 

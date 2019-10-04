@@ -1,0 +1,39 @@
+***Feature_InterQuartileRange_Info***
+The interquartile range of the occurence probability values in the histogram.
+ 
+***Feature_Kurtosis_Info***
+Measure the peakedness of the occurence probability values in the histogram.
+ 
+***Feature_MeanAbsoluteDeviation_Info***
+The mean absolute deviation of the occurence probability values in the histogram.
+ 
+***Feature_MedianAbsoluteDeviation_Info***
+The median absolute deviation of the occurence probability values in the histogram.
+ 
+***Feature_Percentile_Info***
+-Description: 
+Percentiles of the occurence probability values in the histogram.
+
+-Parameters:
+1.  Percentile: Percent values.
+ 
+***Feature_PercentileArea_Info***
+-Description: 
+Percentiles of values in the accumulative histogram.
+
+-Parameters:
+1.  Percentile: Percent values.
+ 
+***Feature_Quantile_Info***
+-Description: 
+Quantiles of the occurence probability values in the histogram.
+
+-Parameters:
+1.  Quantile: Cumulative probability values.
+ 
+***Feature_Range_Info***
+Measure  the range(MaxValue-MinValue) of the occurence probability values in the histogram.
+ 
+***Feature_Skewness_Info***
+Measure the asymmetry of the occurence probability values in the histogram.
+ 

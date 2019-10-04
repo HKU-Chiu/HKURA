@@ -1,0 +1,25 @@
+***Feature_Busyness_Info***
+For the feature description, refer to the paper below.
+  "Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 "
+ 
+***Feature_Coarseness_Info***
+For the feature description, refer to the paper below.
+  "Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 "
+ 
+***Feature_Complexity_Info***
+For the feature description, refer to the paper below.
+  "Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 "
+ 
+***Feature_Contrast_Info***
+For the feature description, refer to the paper below.
+  "Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 "
+ 
+***Feature_TextureStrength_Info***
+For the feature description, refer to the paper below.
+  "Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 "
+ 

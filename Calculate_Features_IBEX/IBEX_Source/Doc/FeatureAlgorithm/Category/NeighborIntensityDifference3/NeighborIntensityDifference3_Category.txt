@@ -1,0 +1,25 @@
+-Description: 
+1.   This method is to compute neighborhood intensity difference matrix(NIDM) from image inside
+      the binary mask. The neighborhood is in 3D.  All the feature calculation is done the same as NeighborIntensityDifference25 does. 
+2.   NIDM is passed into NeighborIntensityDifference3_Feature.m to compute the related features.
+
+-Parameters:
+1.  NHood: The neighborhood matrix size in X dimension.
+2.  NHoodSym: 1==neighborhood matrix size in Y and Z are calculated to best match neighborhood physical length in X dimension.
+                       0==neighborhood matrx size are same in X, Y, and Z dimensions.
+3.   IncludeEdge: Include edge pixels for analysis (1) or not (0).
+4.   RangeMin:   Minimum intensity value for analysis.
+5.   RangeMax:   Maximum intensity value for analysis.
+6.   NBins:       The number of bins.
+RangeMin, RangeMax, NBins are used to reduce the number of interested intensity level.
+
+-References:
+1. Amadasun, M.; King, R. Textural features corresponding to textural properties.
+   IEEE Transactions on Systems, Man and Cybernetics,Volume 19 Issue 5, Page 1264-1274 
+
+-Revision:
+2014-05-22: The method is implemented.
+
+-Authors:
+Joy Zhang, lifzhang@mdanderson.org
+David Fried, DVFried@mdanderson.org

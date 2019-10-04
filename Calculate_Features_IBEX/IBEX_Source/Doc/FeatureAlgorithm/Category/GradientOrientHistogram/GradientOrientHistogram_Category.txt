@@ -1,0 +1,16 @@
+-Description: 
+ Implementation of Histogram of gradient orientations.
+
+-Parameters:
+nBins: number of bins for histogram
+
+-Revision:
+V1: 20151012
+
+-Reference
+1.  T. Pallavi, et al. Texture Descriptors to distinguish Radiation Necrosis 
+     from Recurrent Brain Tumors on multi-parametric MRI. Proc SPIE. 2014; 
+     9035: 90352B. http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4045619/
+
+-Author:
+Jinzhong Yang, JYang4@mdanderson.org

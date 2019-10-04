@@ -1,0 +1,26 @@
+-Description: 
+1.   This method is to fit histogram with gaussian curves.
+2.   Gaussian curve information is passed into IntensityHistogram_Feature.m to compute the related features.
+
+-Parameters:
+1. NBins:          The number of bins.
+2. RangeMin:    Lower bound of bin location.
+3. RangeMax:   Upper bound of bin location.
+4. RangeFix:     1==The specified RangeMin and RangeMax specified are used. 0==Ignore the specified RangeMin and RangeMax, and 
+                    RangeMin and RangeMax are dynamically determined by min and max of the current image.
+5. OnlyUseMaxSlice:  1: Binary mask only contains the binary slice with the maximum area. 0: Use the binary mask as it is.
+6. NumberOfGauss: The number of gaussian curves to be fitted.
+
+-Revision:
+2014-10-17: The method is implemented.
+
+-Algorithm:
+1. First set NumberOfGauss to 1, detect the maximum occurence position,
+    use this position to set gaussian mean, gaussian amplitude, and then fit
+    the gaussian curve.
+2. Get the residual curve=Original curve-Gaussian curve
+3. Repeat step 1 and step 2, until NumberOfGauss is reached.
+
+
+-Authors:
+Joy Zhang, lifzhang@mdanderson.org

@@ -1,0 +1,8 @@
+IntensityHistogramGaussFitList={
+'NumberOfGauss';
+'GaussAmplitude';
+'GaussMean';
+'GaussStd';
+'GaussArea';
+'HistArea';
+};

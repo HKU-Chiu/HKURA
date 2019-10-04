@@ -1,0 +1,32 @@
+***Feature_GaussAmplitude_Info***
+-Description: 
+Amplitude of each gaussian curve
+
+-Reference:
+http://www.mathworks.com/help/curvefit/gaussian.html
+ 
+***Feature_GaussArea_Info***
+-Description: 
+Area of each gaussian curve
+
+-Reference:
+1.   http://www.mathworks.com/help/curvefit/gaussian.html
+2.   http://en.wikipedia.org/wiki/Gaussian_function
+ 
+***Feature_GaussMean_Info***
+-Description: 
+Mean of each gaussian curve
+
+-Reference:
+http://www.mathworks.com/help/curvefit/gaussian.html
+ 
+***Feature_GaussStd_Info***
+-Description: 
+Standard deviation of each gaussian curve
+
+-Reference:
+http://www.mathworks.com/help/curvefit/gaussian.html
+ 
+***Feature_NumberOfGauss_Info***
+The number of gaussian curve that are used to approximate the curve.
+ 

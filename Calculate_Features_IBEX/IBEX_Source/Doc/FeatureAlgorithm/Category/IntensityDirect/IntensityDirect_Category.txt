@@ -1,0 +1,18 @@
+-Description: 
+1. This method is to preprocess the binary mask for the features derived directly from the image intensity.
+    The binary mask can be modified through the intensity thresholding, the binary erosion, 
+    and/or using only the binary slice with the maximum area.
+2.  Image and binary mask are passed into IntensityDirect_Feature.m to compute the related features.
+
+-Parameters:
+1. ThresholdLow:   Lower threshold of image intensity.
+2. ThresholdHigh:  Upper threshold of image intensity.
+3. ErosionDist:       Distance in mm for binary mask erosion.
+4. OnlyUseMaxSlice:  1==Binary mask only contains the binary slice with the maximum area. 0==Use the binary mask as it is.
+
+
+-Revision:
+2014-01-01: The method is implemented.
+
+-Authors:
+Joy Zhang, lifzhang@mdanderson.org

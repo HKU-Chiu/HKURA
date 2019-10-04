@@ -1,0 +1,13 @@
+GrayLevelRunLengthMatrix25List={
+'ShortRunEmphasis';
+'LongRunEmphasis';
+'GrayLevelNonuniformity';
+'RunLengthNonuniformity';
+'RunPercentage';
+'LowGrayLevelRunEmpha';
+'HighGrayLevelRunEmpha';
+'ShortRunLowGrayLevelEmpha';
+'ShortRunHighGrayLevelEmpha';
+'LongRunLowGrayLevelEmpha';
+'LongRunHighGrayLevelEmpha';
+};

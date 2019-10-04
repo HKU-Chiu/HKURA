@@ -1,0 +1,11 @@
+IntensityHistogramList={
+'Skewness';
+'Kurtosis';
+'Range';
+'MeanAbsoluteDeviation';
+'MedianAbsoluteDeviation';
+'InterQuartileRange';
+'Percentile';
+'PercentileArea';
+'Quantile';
+};

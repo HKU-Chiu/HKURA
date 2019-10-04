@@ -1,0 +1,7 @@
+IntensityHistGaussFitOrganList={
+'NumberOfGauss';
+'GaussAmplitude';
+'GaussMean';
+'GaussStd';
+'GaussArea';
+};

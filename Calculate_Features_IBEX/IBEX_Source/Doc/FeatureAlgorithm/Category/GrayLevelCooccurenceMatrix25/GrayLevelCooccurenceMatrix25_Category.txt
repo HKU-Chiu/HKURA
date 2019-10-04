@@ -1,0 +1,34 @@
+-Description: 
+1.  This method is to compute gray-level co-ccorrence matrix(GLCM) from image inside
+    the binary mask in 2.5D in 4 directions. GLCM summing occurence from all
+    directions is computed also.  2.5D means:  First the occurence of individual
+    intensity pair is computed in 2D slice by slice. Then, sum the occurence of individual intensity pair from all 2D image slices.
+    All the feature calculation is done the same as GrayLevelCooccurenceMatrix3 does.
+2.  GLCM is passed into GrayLevelCooccurenceMatrix25_Feature.m to compute the related features.
+
+-Parameters:
+1.  Direction: Define the angle of intensity pair, 4 directions (45, 90, 180, 270).
+2.  AdaptLimitLevel: If AdaptLimitLevel=1, ignore parameter GrayLimits and NumLevels. GrayLimits set to the minimum(MinValue) and
+     maximum(MaxValue) of the masked image. NumLevels is length(MinValue:MaxValue).
+3.   GrayLimits: Two-element vector that specifis how the grayscale values are linearly scaled into graylevels.
+4.   NumLevels: Integer specifying hte number of gray-levels to use when scaling the grayscale values.
+5.   Offset: The distance between the intensity pair
+6.   Symmetric: 0==The pixel order in the pair matters. 1==The pixel order in the pair doesn't matter.
+
+
+-References:
+1. Haralick, R.M., K. Shanmugan, and I. Dinstein, "Textural Features for Image Classification", 
+     IEEE Transactions on Systems, Man, and Cybernetics, Vol. SMC-3, 1973, pp. 610-621.
+2. Haralick, R.M., and L.G. Shapiro. Computer and Robot Vision: Vol. 1, Addison-Wesley, 1992, p. 459.
+3. MATLAB built-in functions: graycomatrix, graycoprops.
+
+-Revision:
+2014-03-06: The method is implemented.
+2014-07-26: AdaptLimitLevel is added.
+
+
+-Authors:
+Joy Zhang, lifzhang@mdanderson.org
+David Fried, DVFried@mdanderson.org
+Xenia Fave, XJFave@mdanderson.org
+Dennis Mackin, DSMackin@mdanderson.org

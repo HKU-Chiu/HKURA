@@ -1,0 +1,127 @@
+***Feature_Compactness1_Info***
+-Formula:
+Compactness1= (Volume)/(sqrt(pi)*(SurfaceArea)^(2/3)).
+
+-Reference:
+1.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+2.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_Compactness2_Info***
+-Formula:
+Compactness2= 36*pi*(Volume^2)/((SurfaceArea)^3).
+
+-Reference:
+1.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+2.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_Convex_Info***
+-Description: 
+1. Measure the proportion of the pixels in the convex hull that are also in the region. 
+2. Refer to MATLAB "regionprops(Mask, 'Solidity')" for details
+
+-Formula:
+1. First, compute convex value  in 2D slice-by-slice. Convex=regionprops(2DMask, 'Solidity')
+2. Then, compute the mean of convex value among the slices.
+ 
+***Feature_ConvexHullVolume_Info***
+The mean volume of the 2D convex hulls that are the convex envelopes of each slice's binary mask. 
+ 
+***Feature_ConvexHullVolume3D_Info***
+3D volume of the convex hull that is the convex envelope of binary mask. 
+ 
+***Feature_Mass_Info***
+Mass caculation is only meaningful to CT images.
+ 
+***Feature_Max3DDiameter_Info***
+-Description:
+Max3DDiameter= largest pairwise Euclidean distance between voxels on the surface of the tumor volume.
+
+-Reference:
+1.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+2.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_MeanBreadth_Info***
+-Formula:
+MeanBreath=Integral of mean curvature
+
+-References:
+1.   Computation of Minkowski measures on 2D and 3D binary images". David Legland, Kien Kieu and Marie-Francoise Devaux (2007)
+      Image Analysis and Stereology, Vol 26(2), June 2007
+2.   web: http://www.ias-iss.org/ojs/IAS/article/view/811
+ 
+***Feature_NumberOfObjects_Info***
+ 
+ 
+***Feature_NumberOfVoxel_Info***
+-Description: 
+1. The number of voxels treating the edge voxels differently. 
+
+-Parameters:
+1. EdgeVoxelFraction: edge voxel is considered as EdgeVoxelFraction*Voxel.
+ 
+***Feature_Orientation_Info***
+-Description: 
+1. Measure the angle between the x-axis and the major axis of the ellipse in 2D. 
+2. Refer to MATLAB "regionprops(Mask, 'Orientation')" for details
+
+-Formula:
+1. First, compute orientation value  in 2D slice-by-slice. Orientation=regionprops(2DMask, 'Orientation')
+2. Then, compute the mean of orientation value among the slices.
+ 
+***Feature_Roundness_Info***
+-Description: 
+1. Measure how much the binary mask is close to circle in 2D. 
+2. Refer to MATLAB "regionprops(Mask, 'Eccentricity')" for details
+
+-Formula:
+1. First, compute roundness value  in 2D slice-by-slice. Roundness=1-regionprops(2DMask, 'Eccentricity')
+2. Then, compute the mean of roundness value among the slices.
+ 
+***Feature_SphericalDisproportion_Info***
+-Reference:
+1.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+2.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_Sphericity_Info***
+-Reference:
+1.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+2.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_SurfaceArea_Info***
+-Description: 
+The surface area of the binary mask. 
+
+-References:
+1.   Computation of Minkowski measures on 2D and 3D binary images". David Legland, Kien Kieu and Marie-Francoise Devaux (2007)
+      Image Analysis and Stereology, Vol 26(2), June 2007
+2.   web: http://www.ias-iss.org/ojs/IAS/article/view/811
+ 
+***Feature_SurfaceAreaDensity_Info***
+-Description:
+SurfaceAreaDensity == SurfaceVolumeRation in Hugo's paper below.
+-Formula:
+SurfaceAreaDensity= (surface area of the binary mask)/(volume of the binary mask).
+
+-References:
+1.   Computation of Minkowski measures on 2D and 3D binary images". David Legland, Kien Kieu and Marie-Francoise Devaux (2007)
+      Image Analysis and Stereology, Vol 26(2), June 2007
+2.   web: http://www.ias-iss.org/ojs/IAS/article/view/811
+3.    Hugo J. W, Sara Cavalho, et al. Decoding tumour phenotype by noninvasive imaging using a quantitative radiomics approach.
+       Nat. Commun. 2014; 5: 4006.
+4.     http://www.nature.com/ncomms/2014/140603/ncomms5006/extref/ncomms5006-s1.pdf
+ 
+***Feature_Volume_Info***
+-Description: 
+1. The physical volume treating the edge voxels differently. 
+
+-Parameters:
+1. EdgeVoxelFraction: edge voxel is considered as EdgeVoxelFraction*Voxel.
+ 
+***Feature_VoxelSize_Info***
+The physical voxel size. 
+ 

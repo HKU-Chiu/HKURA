@@ -1,0 +1,7 @@
+NeighborIntensityDifference3List={
+'Coarseness';
+'Contrast';
+'Busyness';
+'Complexity';
+'TextureStrength';
+};

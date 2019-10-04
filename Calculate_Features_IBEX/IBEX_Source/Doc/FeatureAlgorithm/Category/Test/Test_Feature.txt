@@ -1,0 +1,3 @@
+***Feature_TestF_Info***
+The skeleton feature returns intensity maximum of ROI image data
+ 

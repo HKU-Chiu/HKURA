@@ -1,0 +1,101 @@
+{
+
+"structures": ["GTV_p_n_MT"],
+
+"imageType": {
+  		  "Original": {},
+		  "Wavelets": {
+				"Wavelets": "Haar",
+				"Index": "",
+				"Direction": "HLH"
+			      }
+
+	    },
+
+"settings": {		   
+    "resample": { # Leave empty if no resampling is required
+		 "resolutionXCm": 0.1, # resampling resolution in L-R
+		 "resolutionYCm": 0.1, # resampling resolution in A-P
+		 "resolutionZCm": 0.1, # resampling resolution in S-I
+		 "interpMethod": "sinc" # "linear" or "sinc"
+	         },
+
+   "perturbation": { # Leave empty if no perturbation is required
+ 	            "sequence": "RV", # any combination of RVCT
+	            "angle2DStdDeg": 7, # std dev to sample angle from normal distrib.
+		    "volScaleStdFraction": 0.1, # std dev to sample volume scale from normal distrib.
+		    "superPixVol": 0.005 # volume of super pixel in cc
+		   },
+
+    "firstOrder" :{ 
+		   "binWidthEntropy": 25,
+		   "offsetForEnergy": 0 # Typically, set to 1000 for CT scans and 0 for other modalities with (+)ve image intensities.
+                  },
+    "texture" :{ 
+                 "numGrLevels": [], # number of gray levels to use. Leave empty to use a fixed binwidth.
+	         "binwidth": 25, # binwidth to discretize an image.
+		 "minIntensity": [], # minimum clipping intensity. Values less than this are clipped to this value. Leave empty for no clipping.
+		 "maxIntensity": [], # maximum clipping intensity. Values greater than this are clipped to this value. Leave empty for no clipping.
+                 "directionality": "2D", # "2D" or "3D"
+		 "avgType": "feature", # "feature" or "textureMatrix"
+		 "voxelOffset": 1, # voxel neighbor distance for Haralick texture calculation.
+		 "patchRadiusVox": [3, 3, 3], # patch radius for NGTDM and NGLDM features.
+		 "imgDiffThresh": 10 # difference threshold for NGTDM and NGLDM features.
+                },
+
+    "shape" :{ 
+	      "rcs": [] # [numRows, numCols, numSlics] to resample scan for shape calculation.. This should be chosen to create a fine enough mesh without too much computational overload. Leave empty to use the resolution same as that of the image.
+             },
+
+    "peakValley" :{ 
+		   "peakRadius": [2, 2, 0], # neighborhood patch radius for averaging intensities.
+		   "units": "vox"	
+                  },
+
+    "ivh" :{ 
+	    "binwidth": 0.1,
+	    "xForIxCc": [200,300,400], # Vector of absolute intensities (e.g. -50:20:100 for    CT, 0:2:28; % PET SUV).
+            "xForIxPct": [20, 30, 40], # Vector of percentage volumes
+            "xForVxAbs": [0, 10, 30], # Vector of absolute volumes [cc]
+	    "xForVxPct": [10, 30, 30] # Vector of percent intensity cutoff			    
+           }		   	
+
+       },
+
+
+
+ "featureClass":{
+			
+
+        "shape": {
+						"featureList": ["all"]
+                 },
+
+        "firstOrder": {
+						"featureList": ["all"]
+			          },
+
+		"glcm": {
+						"featureList": ["all"]
+                },
+
+		"glrlm": {
+						"featureList": ["all"]            
+		         },
+
+		"glszm": {
+						"featureList": ["all"]
+                },
+
+		"gldm": {
+						"featureList": ["all"]
+                },
+
+		"gtdm": {			    	
+						"featureList": ["all"]              
+		         }
+
+
+            }
+
+}
