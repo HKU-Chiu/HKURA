@@ -1,5 +1,6 @@
 function S = struct_flatten(S)
-%See also: https://www.mathworks.com/matlabcentral/fileexchange/45849-flattenstruct2cell
+% Recursive version by J.T.J. van Lunenburg
+% See also: https://www.mathworks.com/matlabcentral/fileexchange/45849-flattenstruct2cell
 
 for field = string(fieldnames(S))' %for loop syntax requires horizontal string array
     if (isa(S.(field), 'struct'))
