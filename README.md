@@ -1,13 +1,13 @@
 # HKURA: The Hong Kong University Radiomics Archive v0.9
 
 ## Extract radiomic featuresets from multiples software projects
-Compute features from images and region-of-interest masks using feature implemented in PyRadiomics, CGITA, IBEX and more!
+Compute features from images and region-of-interest masks using feature implemented in PyRadiomics, CGITA, IBEX and more.
 
 ### Current featuresets:
 - CERR
 - CGITA
 - IBEX
-- Radiomics toolbox
+- Radiomics toolbox (by M.Vallieres et al.)
 - Pyradiomics
 
 Reproduce analyses using their original settings files, or combine multiple libraries to generate new high-dimensional radiomics.
