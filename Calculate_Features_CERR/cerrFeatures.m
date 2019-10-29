@@ -8,7 +8,7 @@ function [names, features] = cerrFeatures(I,M)
 %     load('cerr_dummy_features'); warning('Using dummy data'); return
 
 %--- Load settings
-paramFileName = 'all_features_quantized.json'; %not using structurename
+paramFileName = 'cerrsettings.json'; %not using structurename
 paramS      = getRadiomicsParamTemplate(paramFileName); 
 paramS.toQuantizeFlag = true;
 
