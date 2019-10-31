@@ -10,7 +10,7 @@ PARAM.chooseDepend  = false;  %false: assume default depend locations
 PARAM.fileprefix    = 'cgita'; %output name prefix
 mainFunctionName    = "mainfcn";
 
-main(str2func(mainFunctionName), PARAM);
+main(mainFunctionName, PARAM);
 
 
 %-----------------------------------------
@@ -18,6 +18,7 @@ main(str2func(mainFunctionName), PARAM);
 function main(mainfcn, param)
 	startDir = setEnvironment(param.chooseDepend); 
 	alwaysRunOnTerminate = onCleanup(@()cleanupFcn(startDir));
+	mainfcn = str2func(mainfcnID);
 	mainfcn(param);
 end
 

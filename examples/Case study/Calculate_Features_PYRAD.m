@@ -8,7 +8,7 @@
 
 
 PARAM.data_root     = "C:\Users\Jurgen\Documents\PROJECT ESOTEXTURES\Data_Eso";
-%PARAM.settings.file = [];
+PARAM.settings.file = [];
 PARAM.chooseDepend  = false;  %false: assume default depend locations
 PARAM.fileprefix    = 'pyradiomics'; %output name prefix
 mainFunctionName    = "mainfcn";
