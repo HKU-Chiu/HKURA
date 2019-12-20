@@ -1,4 +1,4 @@
-function [names, values] = pyradiomicsFeatures(im, mask)
+function [names, values] = pyradiomicsFeatures(im, mask, S)
 % features is a 1xN cell array of scalars
 % names is a 1xN cell array of strings, formatted for table() compatibility
 % Arguments are 3D image I and 3D contigous mask M.
@@ -15,7 +15,7 @@ niftiwrite(uint8(mask), maskName); %must be numeric
 % maskName = 'C:\\Users\\Jurgen\\AppData\\Local\\Temp\\pyradiomics\\data\\brain1_label.nrrd';
 
 %--- Create extractor and execute with filenames
-kwa = pyargs('binCount', uint8(64));
+kwa = pyargs('binCount', uint8(S.parameters.bincount));
 extractor = py.radiomics.featureextractor.RadiomicsFeatureExtractor(kwa);
 featureVector = extractor.execute(imageName, maskName); 
 
