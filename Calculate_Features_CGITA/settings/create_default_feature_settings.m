@@ -1,4 +1,4 @@
-function varargout = create_default_feature_settings(varargin)
+function varargout = create_default_feature_settings(fname)
 % This is a script that determines the settings for the textural feature
 % computing. 
 
@@ -222,8 +222,8 @@ end
 % 3 - use 0 and max within the rectangular cylinder volume 
 % 4 - use preset min and max values (needs to assign both values)
 digitization_flag = 1;
-default_digitization_min = 0;
-default_digitization_max = 25;
+default_digitization_min = [];
+default_digitization_max = [];
 digitization_bins = 64;
 
 default_primary_colormap = 'hot';
@@ -236,7 +236,7 @@ settings_dir = uigetdir(pwd, 'Select the settings directory');
 cd1 = cd;
 if settings_dir~=0
     cd(settings_dir);
-    matname = 'feature_settings.mat';
+    matname = fname;
 
     if ~exist(matname)
 		save(matname, 'feature_structure', ...

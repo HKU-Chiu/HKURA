@@ -11,13 +11,7 @@ function handles = Perform_TA_in_GUI(handles)
 %   range
 
 assert(~isempty(handles.mask_vol_for_TA{1}{1}));
-
-try
-    load feature_settings.mat; %loads feature_structure
-catch
-    create_default_feature_settings()
-    load feature_settings.mat
-end
+feature_structure = handles.feature_structure;
 
 n_parent = 10;
 Feature_table = {};
