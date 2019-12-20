@@ -30,6 +30,11 @@ The code is structured to have one folder per platform featureset, so a user may
 ## Usage
 Features can be generated using the function `[X]Features` where `[X]` is the name of the platform, e.g. `ibexFeatures(image, mask)`  takes a single image and/or mask, and optional settings. See the function documentation (`help hkuradiomics`) and the examples in the ["examples"](../../tree/master/examples) folder.
 
+## Sample data
+For testing purposes, there are nifti/nifti and dicom/rtstruct sample image pairs available for download at:
+https://drive.google.com/open?id=13Uk8RCjQ_i0QusQzZDBA1heRXocya164
+But since the examples include a case study on an open dataset, that data can be used as a benchmark too.
+
 ## Developers
 - [Jurgen van Lunenburg](https://github.com/jvanlunenburg)<sup>1</sup>
 - Collaborators are welcome
