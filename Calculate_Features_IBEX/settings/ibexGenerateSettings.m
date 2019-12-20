@@ -1,6 +1,13 @@
-function inputList = generateIBEXsettings()
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function FeatureSetsInfo = generateIBEXsettings(saveflag)
+%Generate a feature settings strucutre compatible with IBEX
+%   settings = ibexGenerateSettings(saveflag)
+% 
+%  saveflag is boolean, if true will save it as "IBEX_features_default.mat"
+%  that contains the field FeatureSetsInfo
+%
+% Under construction, currently only suitable for predicting featureset
+% size.
+
 
 fields =     [  "Preprocess"
                 "PreprocessStore"
@@ -96,7 +103,7 @@ for idx = 1:N
     clear sa;
     sa(1, Nopt) = fso; 
     %Populate Name & Value fields
-    empty = repmat({""},1,Nopt);
+    empty = repmat({[]},1,Nopt);
     if ((selectCategoryID(idx) == 1) | (selectCategoryID(idx) == 5) | (selectCategoryID(idx) == 6))
         perc = cellfun(@(x) strcmp('Percentile',x), featureset);
         percarea = cellfun(@(x) strcmp('PercentileArea',x), featureset);
@@ -114,14 +121,16 @@ end
                     
 nvpairs = [cellstr(fields)'; repmat("", 1, length(fields))];
 input = struct(nvpairs{:});
-inputList(N, 1) = input;
+FeatureSetsInfo(N, 1) = input;
 for idx = 1:N
-    inputList(idx).Category = selectCategory(idx); %, CS, F, FS, Comment, Date);
-    inputList(idx).CategoryStore = struct('Name', selectCategory(idx), 'Value', selectCategoryStore{idx});
-    inputList(idx).Feature = featuresetList{idx};
-    inputList(idx).FeatureStore = featuresetOptions{idx};
+    FeatureSetsInfo(idx).Category = selectCategory(idx); %, CS, F, FS, Comment, Date);
+    FeatureSetsInfo(idx).CategoryStore = struct('Name', char(selectCategory(idx)), 'Value', selectCategoryStore{idx});
+    FeatureSetsInfo(idx).Feature = featuresetList{idx};
+    FeatureSetsInfo(idx).FeatureStore = featuresetOptions{idx};
 end
 
-
+if saveflag
+    save("IBEX_features_default.mat", "FeatureSetsInfo");
+end
 
 end

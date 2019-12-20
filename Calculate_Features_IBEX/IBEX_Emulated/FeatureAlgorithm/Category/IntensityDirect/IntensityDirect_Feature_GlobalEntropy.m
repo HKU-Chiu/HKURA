@@ -36,7 +36,7 @@ if isfield(Param, 'RangeFix') && Param.RangeFix < 1
     Param.RangeMax=MaxV;    
 end
 
-InterVal=(Param.RangeMax-Param.RangeMin)/Param.NBins;
+InterVal=(Param.RangeMax  -Param.RangeMin)/Param.NBins;
 
 
 BinLoc=double(Param.RangeMin:InterVal:Param.RangeMax);

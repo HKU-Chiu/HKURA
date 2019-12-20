@@ -1,3 +1,26 @@
+function settings = ibexLoadSettings(file)
+    % Analyze IBEX settings information based on settings file.
+    %
+    % settings = ibexLoadSettings(filestring)
+    %
+    % IBEX uses a .mat file with FeatureSetsInfo struct.
+    % If you don't have a valid file, generate one with
+    % ibexGenerateSettings(). You can then (carefully) edit and save the structure manually.
+
+    varname = "FeatureSetsInfo";
+    assert(logical(exist(file,'file')), "CUSTOM:nosettings", "Can't find file by the name: " + file);
+    [~,~,ext] = fileparts(file);
+    assert(ext == ".mat", "CUSTOM:nosettings", "Settings file invalid: doesn't have .mat extension");
+    settings = load(file);
+    assert(isfield(settings, varname), "CUSTOM:nosettings", "Settings file did not contain expected variable: " + varname)
+    
+    settings.file = file;
+    [settings.Nfeatures, settings.scalarOnly] = parseFeatureset(settings.(varname));
+    
+    assert(settings.Nfeatures > 0, "Empty or corrupted featureset?");
+
+end
+
 function [N, scalarOnly] = parseFeatureset(mat)
 %See generateIBEXsettings.m for more information on the IBEX featureset
 %structure. It may help to load an example featureset and browse it in MATLAB.

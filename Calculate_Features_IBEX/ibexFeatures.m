@@ -1,23 +1,37 @@
-function [names, features] = ibexFeatures(I,M,varargin)
+function [names, features] = ibexFeatures(I, M, S)
+% Get radiomics features matching the cerr application featureset 
+%
+% [names, features] = cerrFeatures(I, M, S)
+%
 % features is a 1xN cell array of scalars
 % names is a 1xN cell array of strings, formatted for table() compatibility
-% Arguments are 3D image I, 3D contigous mask M, and path string S.
-% Assumes M is binary, I is floating point or integer data type, S refers to a matlab .mat file. 
+% Arguments are 3D image I and 3D contigous mask M.
+% Assumes M is binary, I is type float or integer.
+% S is an optional settings parameter that defaults to "default"
+% S has to be either: 1) a struct with a "parameters" field containing valid ibex settings
+% or 2) a string "default" or containing the path to an ibex .mat file).
 
-%--- Return dummy data
-%     load('ibex_dummy_features'); warning('Using dummy data'); return
 
+M = logical(M);
 
-%--- Preprocessing
-if isempty(varargin)
-    fname = []; %will result in attempt to save a default file
+if nargin < 3
+    S = "default";
 else
-    fname = varargin{1};
+    if isempty(S)
+        S = "";
+    end
 end
 
-S = loadSettings(fname);
+%--- Load settings if not provided
+if isstring(S)
+    S = struct("file", S);
+    if strcmpi(S.file, "default")
+        S.file = "Reference_IBEX_Featureset.mat";
+    end
+    S.parameters       = ibexLoadSettings(S.file);
+end
 
-FeatureSetsInfo = S.FeatureSetsInfo; %getFeatureset(S.file);
+FeatureSetsInfo = S.parameters.FeatureSetsInfo; %getFeatureset(S.file);
 DataSetsInfo    = getDataset(I,M); %contains cropped image & cropped mask
 
 %Result Header, 2 rows: top = category, bottom = meta + feat
@@ -107,7 +121,7 @@ warning on
 % 3. Variable names can be up to 63 characters long.
 % 4. To avoid duplicate feature names: category name appended
 
-names    = join(HeaderCell(:,5:end), '_', 1);
+names    = join(HeaderCell(:,5:end), '_', 1); %default names break rule 1
 names = strrep(names,' ','_');
 names = strrep(names,'-','');
 names = strrep(names,'.','');
