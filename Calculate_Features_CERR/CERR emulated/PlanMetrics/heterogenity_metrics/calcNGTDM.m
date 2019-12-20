@@ -68,12 +68,10 @@ indM = reshape(bsxfun(@plus,lin_row,(0:colWindow-1)*m),rowWindow*colWindow,[]);
 s = zeros(numGrLevels,1);
 p = zeros(numGrLevels,1);
 
-tic
+
 % Iterate over slices. compute cooccurance for all patches per slice
 for slcNum = (1+numSlcsPad):(numSlices+numSlcsPad)
-    
-    disp(['--- NGTDM Calculation for Slice # ', num2str(slcNum), ' ----']) 
-    
+        
     calcSlcIndV = calcIndM(:,:,slcNum);    
     calcSlcIndV = calcSlcIndV(:);
     numCalcVoxs = sum(calcSlcIndV);
@@ -120,5 +118,5 @@ for iLev = 1:numGrLevels
     p(iLev) = sum(scanLev3M(:)) / numVoxels;
 end
 
-toc
+
 

@@ -71,11 +71,10 @@ maxNbhoodSz = prod(2*patchSizeV+1)-1;
 %maxNbhoodSz = 8;
 s = zeros(numGrLevels,maxNbhoodSz+1);
 
-tic
+
 % Iterate over slices. compute cooccurance for all patches per slice
 for slcNum = (1+numSlcsPad):(numSlices+numSlcsPad)
     
-    disp(['--- NGLDM Calculation for Slice # ', num2str(slcNum), ' ----']) 
     
     calcSlcIndV = calcIndM(:,:,slcNum);    
     calcSlcIndV = calcSlcIndV(:);
@@ -118,5 +117,4 @@ for slcNum = (1+numSlcsPad):(numSlices+numSlcsPad)
     end 
     
 end
-toc
 

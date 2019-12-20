@@ -1,4 +1,4 @@
-function featureS = calcRadiomicsForImgType(volOrig3M,maskBoundingBox3M,paramS,gridS)
+function featureS = calcRadiomicsForImgType(volOrig3M, maskBoundingBox3M, paramS, gridS)
 %calcRadiomicsForImgType.m
 %Derive user-defined image type and extract radiomics features.
 %
@@ -99,7 +99,7 @@ if whichFeatS.firstOrder.flag
         paramS.firstOrderParamS.offsetForEnergy,paramS.firstOrderParamS.binWidthEntropy);
 end
 
-tic
+
 %---2. Shape features ----
 if whichFeatS.shape.flag
     xValsV = gridS.xValsV;
@@ -112,7 +112,7 @@ if whichFeatS.shape.flag
     featureS.(outFieldName).shapeS = getShapeParams(maskBoundingBox3M, ...
         {xValsV, yValsV, zValsV},rcsV);
 end
-toc
+
 
 %---3. Higher-order (texture) features ----
 
