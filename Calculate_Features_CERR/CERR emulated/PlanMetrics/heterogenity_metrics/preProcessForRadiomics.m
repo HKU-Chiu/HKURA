@@ -14,6 +14,8 @@ zval = linspace(0,zval,size(scanArray3M,3));
 
 uniqueSlices = find(any(mask3M,[1, 2]));
 
+origSiz = size(mask3M); %moved this line to before padding, to fix a bug
+
 % Pad scanArray and mask3M to interpolate
 minSlc = min(uniqueSlices);
 maxSlc = max(uniqueSlices);
@@ -31,7 +33,6 @@ end
 
 % Crop scan around mask
 margin = 10; %DANGER
-origSiz = size(mask3M);
 [minr, maxr, minc, maxc, mins, maxs] = compute_boundingbox(mask3M);
 minr = max(1,minr-margin);
 maxr = min(origSiz(1),maxr+margin);
