@@ -1,19 +1,29 @@
+% Case Study using NSCLC-Radiomics dataset from TCIA
+% By J.T.J. van Lunenburg
+% As part of the HKU Radiomics Archive platform, available on gitgub.com
+%
+% Purpose: 
+% 1) Showcase the usage for automatic processing with multiple featuresets.
+% 2) Evaluate codebase performace (record times per featureset per patient)
+% 3) Analyze implementation differences between similar features.
+% 4) Repeat the clinical phenotype clustering from literature with a larger featureset.
+
 root = "C:\Users\Jurgen\Documents\PROJECT ESOTEXTURES\Data\Data_OpenLungAerts\NSCLC-Radiomics\";
 csvname = "radiomics_test"; %gets appended with "complete" or "partial"
 stopwatch = processCohort(root, csvname); 
 
-function tictocs = processCohort(root, csvname)
+function varargout = processCohort(root, csvname)
 
     %--- Parse dataset paths, library settings, and predict output size
     disp("parsing data files and settings");
     cohort = load_lungradiomics(root, "roi");
-    Npatient = numel(cohort);
-    settings = loadSettings("cgita", [], "mvalradiomics", [], "pyradiomics", [], "cerr", [], "ibex", "default"); %struct with one field per library
+    settings = loadSettings("cgita", [], "mvalradiomics", [], "pyradiomics", [], "cerr", [], "ibex", "default"); %nested struct with one toplvl field per library
     flat = struct2array(settings);
     Nlibraries = length(flat);
     Nfeature = sum([flat.Nvariables]);
+    Npatient = numel(cohort);
 
-    %--- Initialize a table for each featureset, then iterate
+    %--- Initialize a table for the total featureset, then iterate
     disp("starting cohort processing with " + Nlibraries + " supported featuresets");
     featuretable  = table('Size',[Npatient Nfeature],'VariableTypes',repmat({'double'},1,Nfeature)); %Can't initialize with variable names because they're complex to predict, i.e. generated in realtime by the original codebase.
     namelog = strings(size(featuretable));
@@ -55,37 +65,51 @@ function tictocs = processCohort(root, csvname)
         end
     end
     
-    %--- Update table names and save results
-        names = namelog(idx, :);
+    %--- Update output file name. Then save results.
+        csvname = csvname + "_features_completed";
+        disp('Completed analysis, saving output...');
+        saneSave();
+    
+    %--- Utility functions    
+    function finalizeTable()
+        varnames = namelog(idx, :);
         prefixes = strings(1, Nfeature);
         prefixes(cerrvars) = "cerr_";
         prefixes(ibexvars) = "ibex_";
         prefixes(mvalvars) = "rad_";
         prefixes(cgitavars) = "cgita_";
         prefixes(pyradvars) = "pyrad_";
-        names = prefixes + names;
-        %names = "V" + string(1:Nfeature);
-        %names(cerrvars) = "V" + string(cerrvars);
-        featuretable.Properties.VariableNames = names; 
-        csvname = csvname + "_features_completed";
-        disp('Completed analysis, saving output...');
-        saneSave();
+        varnames = prefixes + varnames;
+        
+        featuretable.Properties.VariableNames = varnames; 
+        PatientID = cell2table(transpose({cohort.patientID}));
+        featuretable = [PatientID, featuretable];
+    end
     
-    %--- Utility functions    
     function saneSave()
         namelog(all(namelog == "", 2),:) = []; %remove empty rows
         if(isempty(namelog))
             disp('Oops, no output was generated, skipping save');
-        else    %rows should be constant
-            assert(size(unique(namelog, 'rows'), 1) == 1, 'CUSTOM:NamesVary', namelog);
+        else    
+            assert(size(unique(namelog, 'rows'), 1) == 1, 'CUSTOM:NamesVary', namelog); %name rows should be constant
+            finalizeTable();
             outNamexlsx = strcat(csvname, '.xlsx');
             if exist(outNamexlsx, 'file')==2
-                warning("Overwriting existing xlsx file");
+                warning("Attmpting to overwrite existing xlsx file:" + outNamexlsx);
                 try delete(outNamexlsx); catch, end
             end
-            writetable(featuretable, outNamexlsx,'FileType','spreadsheet'); 
-            save(strcat(csvname, '.mat'),'featuretable', 'tictocs', 'namelog', 'settings'); 
-            disp(['Finished saving in ' pwd]);
+            varargout{1} = tictocs;
+            try
+                writetable(featuretable, outNamexlsx,'FileType','spreadsheet'); 
+                save(strcat(csvname, '.mat'),'featuretable', 'tictocs', 'namelog', 'settings'); 
+                disp(['Finished saving in ' pwd]);
+            catch
+                disp("A problem occurred during save, outputting features to return value")
+                varargout{2} = featuretable;
+                varargout{3} = settings;
+                varargout{4} = namelog;
+            end
+            
         end
     end
     
@@ -100,7 +124,7 @@ function tictocs = processCohort(root, csvname)
         else %Valid output, save what we have before throwing. 
             if idx > 1
                 timestamp = [date '_' datestr(now,'HH-MM-SS')];
-                csvname = csvname + timestamp;
+                csvname = strcat(csvname, timestamp);
                 disp('An error occured, saving partial results');
                 saneSave();
             end

@@ -1,5 +1,6 @@
 function settings = loadSettings(varargin)
 %For each library listed, get useful setting fields: file, filehash, size
+% Returns a nested struct with one top-level field for each (used) library.
 %
 % settings = loadSettings(varargin)
 %
@@ -9,10 +10,9 @@ function settings = loadSettings(varargin)
 %
 % An empty bracket will use the default settings. 
 %
-% Library IDs: cerr, mvalradiomics, pyradiomics, ibex, cgita
-%
-% ID strings are case insensitive. Repeats of the same library are not yet
-% supported, as concatenating different parametric featuresets is discouraged for the sake of variable clarity.
+% Currently supports 5 library IDs: cerr, mvalradiomics, pyradiomics, ibex,
+% cgita (case insensitive). Repeats of the same library are not yet
+% supported.
 
 p = inputParser;
 %validationFcn = @(x) assert(ischar(x) || isstring(x), "Only accepts paths to setting files");
