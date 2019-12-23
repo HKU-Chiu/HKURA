@@ -133,8 +133,7 @@ for roi_item = fieldnames(info.StructureSetROISequence)'
 
         % Otherwise, the frame of reference does not match
         else % Notify user that this structure was skipped
-                disp(['Structure ', name, ' frame of reference did not', ...
-                    ' match the image and will not be loaded']);
+            throw(MException('CUSTOM:loadfail', 'frame of reference did not match the image'));
         end
         
     % Otherwise, the load flag was set to false during atlas matching

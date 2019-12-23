@@ -23,6 +23,7 @@ try %mvalloader
         image = squeeze(dicomreadVolume(patient.image)); %assuming: no color
     end
 catch %geurtsloader
+    warning("Primary loader failed, trying second method");
     imstruct = loadRThelper(patient.image, true); %true flag: uses Geurts loading implementation (flipped and rotated w.r.t. MATLAB loader), false: no data
     image = imstruct.data;
     if ~skiproi

@@ -1,4 +1,4 @@
-% Case Study using NSCLC-Radiomics dataset from TCIA
+% Radiomics Case Study using "NSCLC-Radiomics" CT dataset from TCIA
 % By J.T.J. van Lunenburg
 % As part of the HKU Radiomics Archive platform, available on gitgub.com
 %
@@ -10,14 +10,18 @@
 
 root = "C:\Users\Jurgen\Documents\PROJECT ESOTEXTURES\Data\Data_OpenLungAerts\NSCLC-Radiomics\";
 csvname = "radiomics_test"; %gets appended with "complete" or "partial"
-stopwatch = processCohort(root, csvname); 
+output = processCohort(root, csvname); 
 
 function varargout = processCohort(root, csvname)
 
-    %--- Parse dataset paths, library settings, and predict output size
+    %--- Parse dataset paths, read library settings, and predict output size
     disp("parsing data files and settings");
     cohort = load_lungradiomics(root, "roi");
-    settings = loadSettings("cgita", [], "mvalradiomics", [], "pyradiomics", [], "cerr", [], "ibex", "default"); %nested struct with one toplvl field per library
+    settings = loadSettings("cgita", [],...
+        "mvalradiomics", [],...
+        "pyradiomics", [],...
+        "cerr", [],...
+        "ibex", "default"); %nested struct with one toplvl field per library
     flat = struct2array(settings);
     Nlibraries = length(flat);
     Nfeature = sum([flat.Nvariables]);
@@ -26,7 +30,7 @@ function varargout = processCohort(root, csvname)
     %--- Initialize a table for the total featureset, then iterate
     disp("starting cohort processing with " + Nlibraries + " supported featuresets");
     featuretable  = table('Size',[Npatient Nfeature],'VariableTypes',repmat({'double'},1,Nfeature)); %Can't initialize with variable names because they're complex to predict, i.e. generated in realtime by the original codebase.
-    namelog = strings(size(featuretable));
+    namelog = strings(size(featuretable)); %store the returned variable names for sanity checking
     cerrvars = 1:settings.cerr.Nvariables;
     ibexvars = (1 + max(cerrvars)):(settings.ibex.Nvariables + max(cerrvars));
     mvalvars = (1 + max(ibexvars)):(settings.mvalradiomics.Nvariables + max(ibexvars));
@@ -34,7 +38,7 @@ function varargout = processCohort(root, csvname)
     pyradvars = (1 + max(cgitavars)):(settings.pyradiomics.Nvariables + max(cgitavars));
     tictocs = zeros(Npatient, 5);
     
-    for idx = 1:Npatient
+    for idx = 116:Npatient
         disp(['loading patient: ' cohort(idx).patientID ' (' num2str(idx) ' of ' num2str(Npatient) ')']);
 
         try
@@ -72,27 +76,28 @@ function varargout = processCohort(root, csvname)
     
     %--- Utility functions    
     function finalizeTable()
-        varnames = namelog(idx, :);
+        varnames = namelog(1, :);
         prefixes = strings(1, Nfeature);
         prefixes(cerrvars) = "cerr_";
         prefixes(ibexvars) = "ibex_";
         prefixes(mvalvars) = "rad_";
         prefixes(cgitavars) = "cgita_";
         prefixes(pyradvars) = "pyrad_";
-        varnames = prefixes + varnames;
         
+        varnames = prefixes + varnames;
+        rulebreakers = arrayfun(@(X) length(char(X)), varnames) >  63;
+        varnames(rulebreakers) = extractBefore(varnames(rulebreakers), 63);
         featuretable.Properties.VariableNames = varnames; 
         PatientID = cell2table(transpose({cohort.patientID}));
         featuretable = [PatientID, featuretable];
     end
     
     function saneSave()
-        namelog(all(namelog == "", 2),:) = []; %remove empty rows
+        namelog(all(namelog == "", 2),:) = []; %remove empty rows (skipped patients)
         if(isempty(namelog))
             disp('Oops, no output was generated, skipping save');
         else    
-            assert(size(unique(namelog, 'rows'), 1) == 1, 'CUSTOM:NamesVary', namelog); %name rows should be constant
-            finalizeTable();
+            assert(size(unique(namelog, 'rows'), 1) == 1, 'CUSTOM:NamesVary', [namelog(:)]); %name rows should be constant
             outNamexlsx = strcat(csvname, '.xlsx');
             if exist(outNamexlsx, 'file')==2
                 warning("Attmpting to overwrite existing xlsx file:" + outNamexlsx);
@@ -100,6 +105,7 @@ function varargout = processCohort(root, csvname)
             end
             varargout{1} = tictocs;
             try
+                finalizeTable();
                 writetable(featuretable, outNamexlsx,'FileType','spreadsheet'); 
                 save(strcat(csvname, '.mat'),'featuretable', 'tictocs', 'namelog', 'settings'); 
                 disp(['Finished saving in ' pwd]);
@@ -116,7 +122,7 @@ function varargout = processCohort(root, csvname)
     function handleError(e)
         if strcmpi(e.identifier,'CUSTOM:loadfail')
             warning(e.message);
-            disp('skipping patient...');
+            disp('Load error, skipping patient...');
         elseif strcmpi(e.identifier,'CUSTOM:NamesVary') %Corrupt output, throw
                 disp('Feature is named inconsistently over iterations');
                 disp(strsplit(e.message')); 
