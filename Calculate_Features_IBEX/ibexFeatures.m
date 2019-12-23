@@ -158,6 +158,9 @@ function dsInfo = getDataset(im, mask)
         end
     end
     bbox = ceil(bbox.BoundingBox);
+    if (bbox(3)+ bbox(6)) > size(mask, 3)
+        bbox(6) = bbox(6)-1;
+    end
     crop = @(x) x(bbox(2)+ (0:bbox(5)),bbox(1)+ (0:bbox(4)),bbox(3)+ (0:bbox(6))); %Swapped 1st and 2nd dims?
     dsInfo.ROIBWInfo.MaskData    = crop(mask);
     dsInfo.ROIImageInfo.MaskData = crop(im);
