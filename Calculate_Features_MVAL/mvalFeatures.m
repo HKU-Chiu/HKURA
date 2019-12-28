@@ -1,16 +1,15 @@
-function [names, features] = mvalFeatures(I,M, S)
+function [names, features] = mvalFeatures(I, M, S)
 % features is a 1xN cell array of scalars
 % names is a 1xN cell array of strings, formatted for table() compatibility
 % Arguments are 3D image I and 3D contigous mask M.
 % Assumes M is binary, I is type double (integer I might work too). 
 
-
-%--- Return dummy data
-%     load('mval_dummy_features'); warning('Using dummy data'); return
-
-
 %--- Pre-processing
 % Author states that volume should be isotropic, so scaling is done.
+if nargin < 3
+    S = loadSettings("mval", []);
+    S = S.mvalradiomics;
+end
 param = S.parameters;
 
 GROI = prepareVolume(I, M, 'CT',  param.planeRes, param.sliceRes,1, param.tgtIsoRes, 'Global');

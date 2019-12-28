@@ -15,6 +15,7 @@ function radiomicsParamS = getRadiomicsParamTemplate(paramFilename)
 feature accel off
 
 %% Read JSON file
+assert(logical(exist(paramFilename,'file')), "CUSTOM:nosettings", "Can't find file by the name: " + paramFilename);
 userInS = jsondecode(fileread(paramFilename));
 
 %% Get image type

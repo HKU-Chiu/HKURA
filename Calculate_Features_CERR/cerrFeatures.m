@@ -9,7 +9,7 @@ function [names, features] = cerrFeatures(I, M, S)
 % Assumes M is binary, I is type float or integer.
 % S is an optional settings parameter that defaults to "default"
 % S has to be either: 1) a struct with a "parameters" field containing valid cerr settings
-% or 2) a string "default" or containing the path to a cerr json file).
+% or 2) a string containing the path to a cerr json file or "default".
 
 M = logical(M);
 
@@ -24,11 +24,14 @@ if isstring(S)
         S.file = "default_cerrsettings.json";
     end
     S.parameters       = getRadiomicsParamTemplate(S.file); 
-    S.parameters .toQuantizeFlag = true;
+    S.parameters.toQuantizeFlag = true;
+    S.parameters.meta.xres = 1;
+    S.parameters.meta.yres = 1;
+    S.parameters.meta.zres = 1;
 end
 
 %--- CERR Feature extraction
-[volToEval, maskBoundingBox3M, gridS] =  preProcessForRadiomics(I, M);
+[volToEval, maskBoundingBox3M, gridS] =  preProcessForRadiomics(I, M, S.parameters.meta); %grid contains voxel centers in mm, and origin in first voxel.
 features = calcRadiomicsForImgType(volToEval, maskBoundingBox3M, S.parameters , gridS);
 %features.Original is a nested struct with 9 fields:
 % 1 firstOrderS

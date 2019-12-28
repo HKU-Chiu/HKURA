@@ -1,10 +1,10 @@
-function [volToEval,maskBoundingBox3M, gridS] = preProcessForRadiomics(scanArray3M, mask3M)
+function [volToEval,maskBoundingBox3M, gridS] = preProcessForRadiomics(scanArray3M, mask3M, meta)
 % preProcessForRadiomics.m
 % Does cropping and intensity-thresholding.
 %
 % AI 3/28/19
 
-gridS.PixelSpacingV = [2.7344, 2.7344, 3.2700]; 
+gridS.PixelSpacingV = [meta.xres, meta.yres, meta.zres]; 
 xval = size(scanArray3M,1) * gridS.PixelSpacingV(1);
 yval = size(scanArray3M,2) * gridS.PixelSpacingV(2);
 zval = size(scanArray3M,3) * gridS.PixelSpacingV(3);
