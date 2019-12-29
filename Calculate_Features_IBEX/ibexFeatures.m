@@ -56,7 +56,7 @@ DataSetsInfo    = getDataset(I,M); %contains cropped image & cropped mask
  warning off
  for idx=1:NCategories
      current = " (" + string(idx) + " of " + string(NCategories) +")";
-      disp("Calculating features for: " + FeatureSetsInfo(idx).Category + current)
+      %disp("Calculating features for: " + FeatureSetsInfo(idx).Category + current)
      %Preprocess
      TestStruct=FeatureSetsInfo(idx).PreprocessStore;
 
