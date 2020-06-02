@@ -10,7 +10,7 @@ function [names, features] = ibexFeatures(I, M, S)
 % S is an optional settings parameter that defaults to "default"
 % S has to be either: 1) a struct with a "parameters" field containing valid ibex settings
 % or 2) a string "default" or containing the path to an ibex .mat file).
-
+assert(ispc, "IBEX requires mex files specific to MS Windows")
 
 M = logical(M);
 

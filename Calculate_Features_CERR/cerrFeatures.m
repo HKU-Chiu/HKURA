@@ -4,12 +4,13 @@ function [names, features] = cerrFeatures(I, M, S)
 % [names, features] = cerrFeatures(I, M, S)
 %
 % features is a 1xN cell array of scalars
-% names is a 1xN cell array of strings, formatted for table() compatibility
+% names is a 1xN cell array of strings
 % Arguments are 3D image I and 3D contigous mask M.
-% Assumes M is binary, I is type float or integer.
+% Assumes M is binary, I is type float or integer and gets linearly scaled to 0-1.
 % S is an optional settings parameter that defaults to "default"
 % S has to be either: 1) a struct with a "parameters" field containing valid cerr settings
-% or 2) a string containing the path to a cerr json file or "default".
+% or 2) a string containing the path to a cerr json file or "default". See
+% loadSettings() for more info.
 
 M = logical(M);
 
@@ -19,10 +20,10 @@ end
  
 %--- Load settings if S is a string
 if isstring(S)
-    S = struct("file", S);
-    if strcmpi(S.file, "default")
-        S.file = "default_cerrsettings.json";
+    if strcmpi(S, "default")
+        S = "default_cerrsettings.json";
     end
+    S = struct("file", S);
     S.parameters       = getRadiomicsParamTemplate(S.file); 
     S.parameters.toQuantizeFlag = true;
     S.parameters.meta.xres = 1;

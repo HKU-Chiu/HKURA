@@ -126,11 +126,13 @@ end
 
 function s = parsePyradiomics(f)
     if strcmpi(f, "default")
-        s.file = "default";
+        s.file = "Calculate_Features_PYRAD/settings/default.yaml";
+        assert(logical(exist(s.file,'file')), "CUSTOM:nosettings", "Can't find file by the name: " + s.file);
         s.Nvariables = 107;
         s.filehash = [];
-        s.parameters.bincount = 64;
-        s.parameters.kwa = pyargs('binCount', uint8(s.parameters.bincount));
+        s.parameters.kwa = s.file;
+        %s.parameters.bincount = 64;
+        %s.parameters.kwa = pyargs('binCount', uint8(s.parameters.bincount));
     else
         s.file = f;
         assert(logical(exist(s.file,'file')), "CUSTOM:nosettings", "Can't find file by the name: " + s.file);
