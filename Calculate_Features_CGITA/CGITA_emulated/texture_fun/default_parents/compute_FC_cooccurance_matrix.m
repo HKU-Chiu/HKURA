@@ -14,7 +14,7 @@ mask = mask_in;
 
 mask2 = mask(2:end-1, 2:end-1, 2:end-1);
 
-out_mat = zeros(size(mat_in)-[2 2 2]);
+out_mat = zeros(size(mat_in) - [2 2 2]);
 
 squeezed_matrix = zeros(3, 3, numel(out_mat));
 
@@ -63,15 +63,18 @@ for idx1 = 1:size(img_in, 1)
         for idx3 = 1:size(img_in, 3)
             if mask_in(idx1, idx2, idx3)
                 if idx2<size(img_in, 2) && mask_in(idx1, idx2+1, idx3)
-                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1, idx2+1, idx3)]); a = a+1;
+                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1, idx2+1, idx3)]); 
+                    a = a+1;
                     glm_3D(a(1), a(2)) = glm_3D(a(1), a(2))+1;
                 end
                 if idx1<size(img_in, 1) && mask_in(idx1+1, idx2, idx3)
-                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1+1, idx2, idx3)]); a = a+1;
+                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1+1, idx2, idx3)]); 
+                    a = a+1;
                     glm_3D(a(1), a(2)) = glm_3D(a(1), a(2))+1;
                 end
                 if idx3<size(img_in, 3) && mask_in(idx1, idx2, idx3+1)
-                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1, idx2, idx3+1)]); a = a+1;
+                    a = sort([img_in(idx1, idx2, idx3) img_in(idx1, idx2, idx3+1)]); 
+                    a = a+1;
                     glm_3D(a(1), a(2)) = glm_3D(a(1), a(2))+1;
                 end
             end

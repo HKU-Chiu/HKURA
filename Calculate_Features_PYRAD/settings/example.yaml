@@ -1,0 +1,9 @@
+imageType:
+    Original: {}
+    LoG: {'sigma' : [1.0, 3.0]}  # This is a non active comment on a line with active code preceding it.
+    Wavelet: {}
+
+
+setting:
+    binWidth: 0.2
+    resampledPixelSpacing:
