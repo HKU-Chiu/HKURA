@@ -1,27 +1,11 @@
 function files = getFullFiles(input)
 %str    = file       | dir      | pattern
 
-% switch nargin
-%     case 1
-        input = char(input);
-         files = dir(input);
-%         assert(~isempty(files),'No matching files or folders found');
-%         if strcmp(files(1).name,'.') && isempty(regexp(input,'\*','once'))
-%             DIR = true;%?
-%             if (input(end)=='\')||(input(end)=='/'), input(end) = [];end
-%         else 
-%             DIR = false;
-%         end
-%     case 0
-%         files = dir();
-%         assert(~isempty(files),'No matching files or folders found');
-%         input = '';
-%         DIR = false;
-%     otherwise
-%         error('too many arguments');
-% end
-
-%De-folder
+if nargin == 0
+    input = pwd();
+end
+input = char(input);
+files = dir(input);
 folders = cell2mat({files.isdir});
 files = {files.name};
 files = files(~folders);
@@ -35,13 +19,8 @@ if isfolder(input)
         root = [pwd filesep input];
     end
 else
-    sepidx = regexp(input,'(\\|/)');
-    if ~isempty(sepidx)
-        root = checkAbsRel(input(1:sepidx(end)-1));
-    else
-        root = pwd;
-    end
+    root = fileparts(input);
 end
     
-files = strcat([root filesep],files);
+files = strcat([root filesep], files);
 end

@@ -12,6 +12,6 @@ if contains(path, "*")
 	path = extractBefore(path, "*"); %regexp(path, '^.+?[*]+?', 'once', 'match'); 
 end
 
-a = fullfile(path,a);
+a = fullfile(char(path), a);
 end
 

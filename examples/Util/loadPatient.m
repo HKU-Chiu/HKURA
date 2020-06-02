@@ -3,11 +3,11 @@ function [image, mask] = loadPatient(patient)
 %
 % [image, mask] = loadPatient(patient)
 %
-% patient is a struct with image and roi fields (see load_lungradiomics).
+% patient is a struct with "image" and "roi" fields (see loadLungradiomics).
 %
 % There are currently two loading methods based on github code by Vallieres
 % and Geurts. Each loader produces matching image-mask orientations, but
-% the two loaders are flipped & rotated with respect to eachother.
+% the two loaders appear flipped & rotated with respect to eachother.
 %
 % Function will error if a patient with a roi has a blank or wrong sized
 % mask
@@ -34,7 +34,7 @@ end
 
 if ~skiproi
     assert(any(mask(:)),'CUSTOM:loadfail', 'Empty mask not expected');
-	assert(isequal(size(image), size(mask)),'CUSTOM:loadfail','Mask size unequal to image');
+    assert(isequal(size(image), size(mask)),'CUSTOM:loadfail','Mask size unequal to image');
 end
 
 if (nargout == 2) && skiproi % if two outputs are expected from a patient without a roi, a blank mask is returned.

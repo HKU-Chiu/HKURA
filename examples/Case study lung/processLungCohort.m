@@ -3,16 +3,16 @@
 % As part of the HKU Radiomics Archive platform, available on gitgub.com
 %
 % Purpose: 
-% 1) Showcase the usage for automatic processing with multiple featuresets.
+% 1) Showcase the usage for automated extraction of multiple featuresets.
 % 2) Evaluate codebase performace (record times per featureset per patient)
 % 3) Analyze implementation differences between similar features.
 % 4) Repeat the clinical phenotype clustering from literature with a larger featureset.
 
-root = "C:\Users\Jurgen\Documents\PROJECT ESOTEXTURES\Data\Data_OpenLungAerts\NSCLC-Radiomics\";
-csvname = "radiomics_test"; %gets appended with "complete" or "partial"
-output = processCohort(root, csvname); 
+root = "C:\Path\to\folder\NSLC-Radiomics";
+csvnamebase = "radiomics_test"; 
+output = processCohort(root, csvnamebase); 
 
-function varargout = processCohort(root, csvname)
+function varargout = processCohort(root, csvnamebase)
 
     %--- Parse dataset paths, read library settings, and predict output size
     disp("parsing data files and settings");
@@ -38,7 +38,7 @@ function varargout = processCohort(root, csvname)
     pyradvars = (1 + max(cgitavars)):(settings.pyradiomics.Nvariables + max(cgitavars));
     tictocs = zeros(Npatient, 5);
     
-    for idx = 169:Npatient
+    for idx = 1:Npatient
         disp(['loading patient: ' cohort(idx).patientID ' (' num2str(idx) ' of ' num2str(Npatient) ')']);
         try
         [im, mask] = loadPatient(cohort(idx));
@@ -79,13 +79,12 @@ function varargout = processCohort(root, csvname)
     end
     
     %--- Update output file name. Then save results.
-        csvname = csvname + "_features_completed";
+        csvname = csvnamebase + "_features_completed";
         disp('Completed analysis, saving output...');
         saneSave()
         
     %--- Utility functions    
     function finalizeTable()
-        varnames = namelog(1, :);
         prefixes = strings(1, Nfeature);
         prefixes(cerrvars) = "cerr_";
         prefixes(ibexvars) = "ibex_";
@@ -93,7 +92,8 @@ function varargout = processCohort(root, csvname)
         prefixes(cgitavars) = "cgita_";
         prefixes(pyradvars) = "pyrad_";
         
-        varnames = prefixes + varnames;
+        varnames = prefixes + namelog(1, :);
+        
         rulebreakers = arrayfun(@(X) length(char(X)), varnames) >  63;
         varnames(rulebreakers) = extractBefore(varnames(rulebreakers), 63); %need some way to ensure uniqueness post-crop
         featuretable.Properties.VariableNames = varnames; 
@@ -115,7 +115,7 @@ function varargout = processCohort(root, csvname)
             try
                 outNamexlsx = strcat(csvname, '.xlsx');
                 if exist(outNamexlsx, 'file')==2
-                    warning("Attmpting to overwrite existing xlsx file:" + outNamexlsx);
+                    warning("Attempting to overwrite existing xlsx file:" + outNamexlsx);
                     try delete(outNamexlsx); catch, end
                 end
                 finalizeTable();
@@ -135,7 +135,7 @@ function varargout = processCohort(root, csvname)
     function handleError(e)
             if idx > 1 %save what we have before throwing.
                 timestamp = [date '_' datestr(now,'HH-MM-SS')];
-                csvname = strcat(csvname, timestamp);
+                csvname = strcat(csvnamebase, timestamp);
                 disp('An error occured, saving partial results');
                 saneSave();
             end

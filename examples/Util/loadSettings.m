@@ -1,8 +1,8 @@
 function settings = loadSettings(varargin)
-%For each library listed, get useful setting fields.
-% Returns a nested struct with one top-level field for each (used) library.
+%Load a datastructure with settings for each featureset in HKURA
+% Returns a nested struct with one top-level field per loaded library.
 % Each library has 4 subfields: file, filehash, Nvariables, parameters
-% The "parameters" struct may contain unique subfields specific to a featureset
+% The "parameters" field may contain unique subfields specific to a featureset
 %
 % settings = loadSettings(varargin)
 %
@@ -10,7 +10,7 @@ function settings = loadSettings(varargin)
 % loadsettings("ibex", [], "cerr", "home/cerrsettings.json") will process 2
 % featuresets with a single settings file each. 
 %
-% An empty bracket will use the default settings. 
+% An empty bracket will use the default settings. To load all default settings use loadSettings("all"). 
 %
 % Currently supports 5 library IDs: cerr, mvalradiomics, pyradiomics, ibex,
 % cgita (case insensitive). Repeats of the same library are not yet
@@ -45,12 +45,13 @@ filereader.ibex = @parseIbex;
 for library = used
     if ~parseskip 
         file = p.Results.(library);
+        if (isempty(file) || file == "")
+            file = "default";
+        end
     else
         file = "default";
     end
-    if (isempty(file) || file == "")
-        file = "default";
-    end
+
     settings.(library) = filereader.(library)(file);
 end
 
@@ -129,10 +130,11 @@ function s = parsePyradiomics(f)
         s.Nvariables = 107;
         s.filehash = [];
         s.parameters.bincount = 64;
+        s.parameters.kwa = pyargs('binCount', uint8(s.parameters.bincount));
     else
         s.file = f;
         assert(logical(exist(s.file,'file')), "CUSTOM:nosettings", "Can't find file by the name: " + s.file);
-        s.parameters = load(s.file); %raw load
+        s.parameters.kwa = s.file;
     end
     
     if ~strcmpi(f, "default")
